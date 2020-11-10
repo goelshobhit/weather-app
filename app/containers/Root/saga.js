@@ -7,7 +7,7 @@ function* getData({ params }) {
   try {
     const options = {
       method: 'get',
-      url: `http://api.openweathermap.org/data/2.5/forecast?lat=${
+      url: `https://api.openweathermap.org/data/2.5/forecast?lat=${
         params.lat
       }&lon=${params.lng}&cnt=5&APPID=2fc0d182e0ab28bd228d0f07bff89a86`,
     };

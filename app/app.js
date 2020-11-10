@@ -81,7 +81,7 @@ if (!window.Intl) {
 // it's not most important operation and if main code fails,
 // we do not want it installed
 if (process.env.NODE_ENV === 'production') {
-  runtime.install({
+  require('offline-plugin/runtime').install({
     onUpdating: () => {},
     onUpdateReady: () => {
       // Tells to new SW to take control immediately
