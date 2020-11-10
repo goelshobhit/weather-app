@@ -1,9 +1,6 @@
-import { call, put, select, takeLatest } from 'redux-saga/effects';
-import request from 'utils/request';
-import { change } from 'redux-form';
+import { put, takeLatest } from 'redux-saga/effects';
 import { SIGN_IN } from './constants';
 import { signInError } from './actions';
-import { signInSuccess } from '../App/actions';
 
 function* signIn() {
   try {
