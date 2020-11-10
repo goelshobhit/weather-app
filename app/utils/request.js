@@ -8,15 +8,6 @@ export const axiosInstance = axios.create({
   responseType: 'json',
 });
 
-axiosInstance.interceptors.request.use(
-  config => {
-    const { token } = configuredStore.getState().SignIn;
-    config.headers.deviceType = 'web';
-    return config;
-  },
-  err => Promise.reject(err),
-);
-
 axiosInstance.interceptors.response.use(
   response => {
     if (response.data) return response.data;
