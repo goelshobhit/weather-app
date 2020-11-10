@@ -3,25 +3,17 @@ import request from 'utils/request';
 import { GET_WEATHER_DATA } from './constants';
 import { weatherDataSucces, weatherDataFail } from './actions';
 
-// Individual exports for testing
-
-// api.openweathermap.org/data/2.5/forecast/daily?lat={lat}&lon={lon}&cnt={cnt}&appid={API key}
-
 function* getData({ params }) {
-  console.log(params);
-  console.log(params.lat);
-  console.log(params.lng);
   try {
     const options = {
       method: 'get',
+      url: `http://api.openweathermap.org/data/2.5/forecast?lat=${
+        params.lat
+      }&lon=${params.lng}&cnt=5&APPID=2fc0d182e0ab28bd228d0f07bff89a86`,
     };
-    const url = `forecast/daily?lat=${params.lat}&lon=${
-      params.lng
-    }&cnt=5&appid=2fc0d182e0ab28bd228d0f07bff89a86`;
-    const response = request(url, options);
-    console.log(response);
+    const response = yield call(request, options);
+    yield put(weatherDataSucces(response));
   } catch (e) {
-    console.log(e);
     yield put(weatherDataFail(e));
   }
 }

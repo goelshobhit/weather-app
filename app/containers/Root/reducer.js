@@ -4,15 +4,32 @@
  *
  */
 import produce from 'immer';
-import { DEFAULT_ACTION } from './constants';
+import {
+  GET_WEATHER_DATA,
+  WEATHER_DATA_FAIL,
+  WEATHER_DATA_SUCCESS,
+} from './constants';
 
-export const initialState = {};
+export const initialState = {
+  loading: false,
+  data: {},
+  error: false,
+};
 
 /* eslint-disable default-case, no-param-reassign */
 const rootReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case DEFAULT_ACTION:
+      case GET_WEATHER_DATA:
+        draft.loading = true;
+        break;
+      case WEATHER_DATA_SUCCESS:
+        draft.loading = false;
+        draft.data = action.payload;
+        break;
+      case WEATHER_DATA_FAIL:
+        draft.loading = false;
+        draft.error = action.error;
         break;
     }
   });
